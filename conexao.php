@@ -35,6 +35,9 @@ class Conexao{
 	
 	public function Select($tabela, $filtro)
     {
+		if(empty($filtro)){
+			$filtro = 1;
+		}
         try {
             $query = "SELECT * FROM $tabela WHERE :filtro";
             $stmt = $this->db->prepare($query);
@@ -48,6 +51,10 @@ class Conexao{
 	
 	 public function Update($tabela, $dados, $filtro)
     {
+		if(empty($filtro)){
+			echo "Necessário informar um filtro";
+			exit();
+		}
         try {
             $updates = "";
             foreach ($dados as $key => $value) {
@@ -72,6 +79,10 @@ class Conexao{
 	
 	 public function Deletar($tabela, $filtro)
     {
+		if(empty($filtro)){
+			echo "Necessário informar um filtro";
+			exit();
+		}
         try {
             $query = "DELETE FROM $tabela WHERE :filtro";
             $stmt = $this->db->prepare($query);
